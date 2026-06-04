@@ -1,11 +1,11 @@
-# Dave's Tiny Editor (DTE) v2.0.9
-A working Windows text editor in 981 bytes.
+# RetroPad
+A working, Notepad-style Windows text editor in roughly 2.5 KB.
 
 Compiles with: MASM and Crinkler.
 
-DTE is an extension of `tiny.asm` HelloAssembly by Dave Plummer https://github.com/davepl. The idea is to make a working windowed text editor in the sub-1KB category. It uses Crinkler https://github.com/runestubbe/Crinkler compression at build time.
+RetroPad is a fork of **Dave's Tiny Editor (DTE)** by Matt Power, which is itself an extension of `tiny.asm` HelloAssembly by Dave Plummer https://github.com/davepl. The original goal was a working windowed text editor in the sub-1KB category; RetroPad keeps that minimalist, size-obsessed spirit while filling out a full Notepad-style menu set (File / Edit / Format / View / Help) on top of it. It uses Crinkler https://github.com/runestubbe/Crinkler compression at build time.
 
-DTE is basically a wrapper around the RICHEDIT50W control from the WinAPI. Versions 1.0+ use the EDIT control with Crinkler cranked and were built-up from tiny.asm then worked down to 890 bytes with Win Defender quite unhappy. Versions 2.0+ have Crinkler backed-off a bit and use RICHEDIT to gain cheaper access to Courier font and much larger files. 2.0+ was then worked down from 995 to 981 bytes. 
+RetroPad is basically a wrapper around the RICHEDIT50W control from the WinAPI. DTE versions 1.0+ used the EDIT control with Crinkler cranked and were built up from tiny.asm, then worked down to 890 bytes with Win Defender quite unhappy. Versions 2.0+ backed Crinkler off a bit and use RICHEDIT to gain cheaper access to Courier font and much larger files; 2.0+ was worked down from 995 to 981 bytes as a bare editor. RetroPad then grows from that 981-byte base by adding real menus and dialogs — Open/Save/Save As, Print/Page Setup, Find/Replace/Go To, Font, Word Wrap, Time/Date, and a Ln/Col status bar — landing near 2,476 bytes. Each addition was kept as cheap as possible; the growth log at the top of [dte.asm](dte.asm) records what every feature cost in bytes.
 
 **Important:** Programs using Crinkler can be flagged as a false positive by antivirus, including Windows Defender. You may need to make an antivirus exception folder to build this (especially for 1.0+), or Windows may delete the EXE as soon as the build completes. Therefore, try this out AT YOUR OWN RISK - NO WARRANTIES / NO GUARANTEES. You can accomplish this with PowerShell, but I am not going to tell you how. Sorry. You're on your own when messing with antivirus.
 
@@ -41,15 +41,15 @@ Example: C:\utils\Crinkler.exe<br>
 ## Contents: <br>
 | Folder | Description |
 |--------|-------------|
-| `1_0` | Version 1.0 aggressive 890 bytes build. Needs AV exception to be usable.|
-| `2_0_BACKUPS` | Version 2.0 more features, 981 bytes build from RICHEDIT to release.|
+| `1_0` | DTE Version 1.0 aggressive 890 bytes build. Needs AV exception to be usable.|
+| `2_0_BACKUPS` | DTE Version 2.0 bare editor, 981 bytes build from RICHEDIT to release.|
 
 | File | Description |
 |------|-------------|
-| `build.bat` | Builds DTE from command line. |
-| `DRAG ME ONTO DTE.txt` | How to use DTE. |
+| `build.bat` | Builds RetroPad from command line. |
+| `DRAG ME ONTO DTE.txt` | How to use the editor. |
 | `DTE ABOUT.txt` | Explains some design decisions. |
-| `dte.asm` | The program. Version 2.0.9 |
+| `dte.asm` | The program. RetroPad, forked from DTE 2.0.9 |
 | `LICENSE.TXT` | Usage permissions (Apache License 2.0). |
 
 ## Building the menus and Notepad features
@@ -155,7 +155,13 @@ resizes the editor and bar together on `WM_SIZE`.
 in the default browser via `ShellExecuteA` — both cheaper than bundling any
 help content.
 
-## DTE in use: <br>
-<img src="images/dte-in-action.jpg" alt="DTE in action" width="500">
+## Credits
+
+- **RetroPad** — fork adding the full Notepad-style menu set and dialogs.
+- **Dave's Tiny Editor (DTE)** — Matt Power, the sub-1KB RICHEDIT editor this fork is built on.
+- **`tiny.asm` / HelloAssembly** — Dave Plummer https://github.com/davepl, the original foundation.
+
+## RetroPad in use: <br>
+<img src="images/dte-in-action.jpg" alt="RetroPad in action" width="500">
 
 
